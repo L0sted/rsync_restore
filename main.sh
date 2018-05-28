@@ -1,7 +1,8 @@
 #not working encrypted setup
 
 #vars
-source="rsync@192.168.100.16/rsync/"
+IP="192.168.100.16"
+source="rsync@"$IP"/rsync/"
 swapSize=$(free -m | grep "Mem" | awk '{print $2}')
 let "swapSize += 512"
 swapSize=$swapSize"M"
