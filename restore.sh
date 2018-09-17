@@ -55,7 +55,7 @@ done
 swapSize=$(free -m | grep "Mem" | awk '{print $2}')
 read -p "Enter extra amount of swap (empty == 512):" swapExtra
 if [ -z "$swapExtra" ] && swapExtra=512
-let "swapSize += swapExtra" #add 512 mbs to swap for 
+let "swapSize += swapExtra" #add 512 mbs to swap for swap, not only hibernation
 swapSize=$swapSize"M"
 
 #DEPLOY
@@ -150,7 +150,7 @@ mv /mnt/etc/fstab /mnt/etc/fstab.orig
 cat /mnt/etc/fstab.orig | grep "ext4" | sed 's/UUID=[A-Fa-f0-9-]*/UUID='${UUIDS[2]}'/' > /mnt/etc/fstab
 cat /mnt/etc/fstab.orig | grep "vfat" | sed 's/UUID=[A-Fa-f0-9-]*/UUID='${UUIDS[1]}'/' >> /mnt/etc/fstab
 cat /mnt/etc/fstab.orig | grep "swap" | sed 's/UUID=[A-Fa-f0-9-]*/UUID='${UUIDS[0]}'/' >> /mnt/etc/fstab
-rm /mnt/etc/fstab.orig
+rm /mnt/etc/fstab.orig #TODO OFC we need to check mountpoint, not only type of FS
 
 echo "==> Result:"
 cat /mnt/etc/fstab
